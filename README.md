@@ -22,17 +22,10 @@ call and restored afterward.
 
 ## Examples
 
-Example masks:
-
-| Region 1 | Region 2 |
-| --- | --- |
-| ![Region 1 mask](assets/region1.png) | ![Region 2 mask](assets/region2.png) |
-
-Example results:
-
-| Result 1 | Result 2 |
-| --- | --- |
-| ![Regional conditioning result 1](assets/result1.png) | ![Regional conditioning result 2](assets/result2.png) |
+| Example | Region Masks | Result |
+| --- | --- | --- |
+| Example 1 | ![Example 1 region mask](assets/region1.png) | ![Example 1 result](assets/result1.png) |
+| Example 2 | ![Example 2 region mask](assets/region2.png) | ![Example 2 result](assets/result2.png) |
 
 ## Nodes
 
@@ -117,12 +110,6 @@ After restarting, the nodes should appear under:
 conditioning/Anima Regional Conditioning
 ```
 
-## Credits
-
-- Developed with assistance from Codex.
-- [Haoming02/sd-forge-couple](https://github.com/Haoming02/sd-forge-couple)
-- [instantX-research/Regional-Prompting-FLUX](https://github.com/instantX-research/Regional-Prompting-FLUX)
-
 ## Current Limitations
 
 - High `self_mask_strength` values can create hard edges or visible separation
@@ -143,3 +130,9 @@ conditioning/Anima Regional Conditioning
   than one region.
 - Very high self-attention masking can make regions more isolated, but may also
   reduce overall image coherence.
+
+## Credits
+
+- Developed with assistance from Codex.
+- [Haoming02/sd-forge-couple](https://github.com/Haoming02/sd-forge-couple)
+- [instantX-research/Regional-Prompting-FLUX](https://github.com/instantX-research/Regional-Prompting-FLUX)
