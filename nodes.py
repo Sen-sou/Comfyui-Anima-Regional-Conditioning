@@ -310,7 +310,10 @@ def _masked_attn_op(
     v: torch.Tensor,
     transformer_options: Optional[dict] = None,
     attn_bias: Optional[torch.Tensor] = None,
+    preferred_attention=None,
+    **kwargs,
 ) -> torch.Tensor:
+
     """
     Drop-in replacement for torch_attention_op that injects a spatial attention
     bias directly into the QK scores before softmax.
@@ -319,10 +322,21 @@ def _masked_attn_op(
       q : [B, S_q, n_heads, head_dim]
       k : [B, S_k, n_heads, head_dim]
       v : [B, S_k, n_heads, head_dim]
-    attn_bias : [B, 1, S_q, S_k]  (broadcasts over heads)
+      attn_bias : [B, 1, S_q, S_k]  (broadcasts over heads)
+      preferred_attention: Legacy or alternate attention mechanism parameter.
+     **kwargs: Catch-all for other future or deprecated keyword arguments lol.
 
     Output: [B, S_q, n_heads * head_dim]
     """
+
+    # Unwrap AttentionTensorContainer if present in newer ComfyUI core
+    if hasattr(q, "tensor"):
+        q = q.tensor
+    if hasattr(k, "tensor"):
+        k = k.tensor
+    if hasattr(v, "tensor"):
+        v = v.tensor
+
     B, Sq, H, D = q.shape
 
     # [B, S, H, D] → [B, H, S, D] for SDPA
